@@ -1,4 +1,6 @@
 package io.hhplus.tdd;
 
-public class PointUnitTest {
+class PointUnitTest {
+    // 유닛 테스트
+
 }

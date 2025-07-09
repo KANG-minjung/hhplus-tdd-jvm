@@ -1,4 +1,5 @@
 package io.hhplus.tdd;
 
-public class PointIntgTest {
+class PointIntgTest {
+    // 통합 테스트
 }
