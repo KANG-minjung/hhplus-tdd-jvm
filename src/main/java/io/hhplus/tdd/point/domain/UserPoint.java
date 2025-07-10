@@ -24,8 +24,13 @@ public record UserPoint(
      */
     public PointConstants usedValid(long amount){
 
+        // 제약 - 만약 사용 Point가 100,000을 초과하면 불가
+        if (amount > 100_000L) {
+            return PointConstants.POINT_USE_EXCEEDS_LIMIT;
+        }
+
         // 사용 Point가 보유 포인트 보다 많으면 사용 불가
-        if (point() < amount) {
+        if (amount - point() > 0) {
             return PointConstants.POINT_USE_EXCEEDS_BALANCE;
         }
 
@@ -34,9 +39,9 @@ public record UserPoint(
             return PointConstants.POINT_USE_ZERO_OR_NEGATIVE;
         }
 
-        // 제약 - 만약 사용 Point가 100,000을 초과하면 불가
-        if (amount > 100_000L) {
-            return PointConstants.POINT_USE_EXCEEDS_LIMIT;
+        // 사용 Point는 5,000씩 적립 가능 (5,000이 아니면 불가)
+        if (amount % 5000 != 0) {
+            return PointConstants.POINT_USE_NOT_MULTIPLE_OF_5000;
         }
 
         return null;
@@ -60,5 +65,4 @@ public record UserPoint(
 
         return null;
     }
-
 }
